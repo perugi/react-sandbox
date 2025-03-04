@@ -1,7 +1,9 @@
+import Greeting from "./Greeting";
+
 function App() {
   return (
     <>
-      <p>Hello, world!</p>
+      <Greeting />
     </>
   );
 }
