@@ -1,0 +1,3 @@
+.product-name:not(.stocked) {
+  color: red;
+}

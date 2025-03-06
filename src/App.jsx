@@ -1,9 +1,10 @@
-import Greeting from "./Greeting";
+import FilterableProductTable from "./FilterableProductTable";
+import PRODUCTS from "./data";
 
 function App() {
   return (
     <>
-      <Greeting />
+      <FilterableProductTable products={PRODUCTS} />
     </>
   );
 }
