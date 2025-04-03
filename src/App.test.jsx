@@ -7,7 +7,7 @@ import { use } from "react";
 describe("App component", () => {
   it("renders default heading", () => {
     const { container } = render(<App />);
-    expect(container).toMatchSnapshot();
+    expect(container).toMatchFileSnapshot("./tests/basic.output.html");
   });
 
   it("renders radical rhinos after user click", async () => {
