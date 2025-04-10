@@ -8,10 +8,10 @@ function App() {
       <nav>
         <ul>
           <li>
-            <Link to="profile">Profile</Link>
+            <Link to="profile/popeye">Popeye</Link>
           </li>
           <li>
-            <a href="profile">Profile a</a>
+            <Link to="profile/spinach">Spinach</Link>
           </li>
         </ul>
       </nav>
