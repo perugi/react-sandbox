@@ -1,23 +1,37 @@
 import styles from "./App.module.css";
 
-const person = {
-  name: "Gregorio Y. Zara",
-  theme: {
-    backgroundColor: "black",
-    color: "red",
-  },
-};
+function ListItem({ animal }) {
+  console.log({ animal });
+  return <li>{animal}</li>;
+}
+
+function List({ animals }) {
+  if (!animals) {
+    return <div>Loading...</div>;
+  }
+
+  if (animals.length === 0) {
+    return <div>There are no animals in the list!</div>;
+  }
+
+  console.log({ animals });
+
+  return (
+    <ul>
+      {animals.map((animal) => {
+        return <ListItem key={animal} animal={animal} />;
+      })}
+    </ul>
+  );
+}
 
 function App() {
+  const animals = ["Snakes", "On", "A", "Plane"];
+
   return (
-    <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
-      <img src="https://imgur.com/7vQD0fPs.jpg" alt="" />
-      <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronatics lectures</li>
-        <li>Work on the alcohol-fueled engine</li>
-      </ul>
+    <div>
+      <h1>Animals:</h1>
+      <List animals={animals} />
     </div>
   );
 }
