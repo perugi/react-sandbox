@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import { v4 as uuid } from "uuid";
 
 function ListItem({ animal }) {
   console.log({ animal });
@@ -25,14 +26,19 @@ function List({ animals }) {
   );
 }
 
-function App() {
-  const animals = ["Snakes", "On", "A", "Plane"];
+const todos = [
+  { task: "mow the yard", id: uuid() },
+  { task: "work on TOP", id: uuid() },
+  { task: "feed the cat", id: uuid() },
+];
 
+function App() {
   return (
-    <div>
-      <h1>Animals:</h1>
-      <List animals={animals} />
-    </div>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.task}</li>
+      ))}
+    </ul>
   );
 }
 
