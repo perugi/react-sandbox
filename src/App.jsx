@@ -1,44 +1,29 @@
 import styles from "./App.module.css";
-import { v4 as uuid } from "uuid";
+import { useState } from "react";
 
-function ListItem({ animal }) {
-  console.log({ animal });
-  return <li>{animal}</li>;
+function Button({ label, onClick }) {
+  return <button onClick={onClick}>{label}</button>;
 }
 
-function List({ animals }) {
-  if (!animals) {
-    return <div>Loading...</div>;
-  }
-
-  if (animals.length === 0) {
-    return <div>There are no animals in the list!</div>;
-  }
-
-  console.log({ animals });
-
+function CounterControls({ count, increment, decrement }) {
   return (
-    <ul>
-      {animals.map((animal) => {
-        return <ListItem key={animal} animal={animal} />;
-      })}
-    </ul>
+    <div>
+      <p>Current Count: {count}</p>
+      <Button label="Increment" onClick={increment} />
+      <Button label="Decrement" onClick={decrement} />
+    </div>
   );
 }
 
-const todos = [
-  { task: "mow the yard", id: uuid() },
-  { task: "work on TOP", id: uuid() },
-  { task: "feed the cat", id: uuid() },
-];
-
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.task}</li>
-      ))}
-    </ul>
+    <CounterControls
+      count={count}
+      increment={() => setCount(count + 1)}
+      decrement={() => setCount(count - 1)}
+    />
   );
 }
 
