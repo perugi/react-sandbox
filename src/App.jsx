@@ -1,29 +1,26 @@
 import styles from "./App.module.css";
 import { useState } from "react";
 
-function Button({ label, onClick }) {
-  return <button onClick={onClick}>{label}</button>;
-}
-
-function CounterControls({ count, increment, decrement }) {
+function Card({ title = "Panel", children }) {
   return (
-    <div>
-      <p>Current Count: {count}</p>
-      <Button label="Increment" onClick={increment} />
-      <Button label="Decrement" onClick={decrement} />
+    <div style={{ border: "1px solid black", padding: "1em" }}>
+      <h2 style={{ fontSize: "24px" }}>{title}</h2>
+      {children}
     </div>
   );
 }
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <CounterControls
-      count={count}
-      increment={() => setCount(count + 1)}
-      decrement={() => setCount(count - 1)}
-    />
+    <div>
+      <Card title="This is a panel">
+        <p>This is come content</p>
+        <button>Click me</button>
+      </Card>
+      <Card>
+        <p>I'm reusable!</p>
+      </Card>
+    </div>
   );
 }
 
