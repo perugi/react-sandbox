@@ -1,5 +1,4 @@
 import styles from "./App.module.css";
-import { v4 as uuid } from "uuid";
 import { useState } from "react";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         +3
       </button>
     </div>
-  );
+  )
 }
 
 export default App;
