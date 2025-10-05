@@ -1,62 +1,46 @@
 import styles from "./App.module.css";
 import { useState } from "react";
 
-const initialItems = [
-  { title: "pretzels", id: 0 },
-  { title: "seaweed", id: 1 },
-  { title: "granola", id: 2 },
-];
+function Panel({ title, isActive, makeActive, children }) {
+  return (
+    <section className="panel">
+      <h3>{title}</h3>
+      {isActive ? (
+        <p>{children}</p>
+      ) : (
+        <button onClick={() => makeActive()}>Show</button>
+      )}
+    </section>
+  );
+}
 
 function App() {
-  const [items, setItems] = useState(initialItems);
-  const [selectedItemIdx, setSelectedItemIdx] = useState(0);
-
-  function handleItemChange(id, e) {
-    setItems(
-      items.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            title: e.target.value,
-          };
-        } else {
-          return item;
-        }
-      })
-    );
-  }
+  const [activeIdx, setActiveIdx] = useState(0);
 
   return (
     <>
-      <h2>What's your feavorite snack?</h2>
-      <ul>
-        {items.map((item, index) => (
-          <li key={item.id}>
-            <input
-              value={item.title}
-              onChange={(e) => {
-                handleItemChange(item.id, e);
-              }}
-            />
-            <button
-              onClick={() => {
-                setSelectedItemIdx(index);
-              }}
-            >
-              Choose
-            </button>
-          </li>
-        ))}
-      </ul>
-      <p>You picked {items[selectedItemIdx].title}.</p>
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel
+        title="About"
+        isActive={activeIdx === 0}
+        makeActive={() => setActiveIdx(0)}
+      >
+        With a population of about 2 million, Almaty is Kazakhstan's largest
+        city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel
+        title="Etymology"
+        isActive={activeIdx === 1}
+        makeActive={() => setActiveIdx(1)}
+      >
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for
+        "apple" and is often translated as "full of apples". In fact, the region
+        surrounding Almaty is thought to be the ancestral home of the apple, and
+        the wild <i lang="la">Malus sieversii</i> is considered a likely
+        candidate for the ancestor of the modern domestic apple.
+      </Panel>
     </>
   );
 }
 
 export default App;
-
-function sendMessage(text) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 2000);
-  });
-}
