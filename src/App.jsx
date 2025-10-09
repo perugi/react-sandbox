@@ -2,31 +2,27 @@ import styles from "./App.module.css";
 import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
-function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+function Profile({ user }) {
+  const [width, setWidth] = useState(window.innerWidth);
 
-  const isValid = name && email.includes("@");
+  const fullName = `${user.first} ${user.last}`;
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div>
-      <label for="name">Name:</label>
-      <input
-        id="name"
-        type="text"
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <label for="email">Email:</label>
-      <input
-        id="email"
-        type="text"
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <button type="submit" disabled={!isValid}>
-        Submit
-      </button>
+      <h1>{fullName}</h1>
+      <p>Window width: {width}</p>
     </div>
   );
+}
+
+function App() {
+  return <Profile user={{ first: "Dominik", last: "Perusko" }} />;
 }
 
 export default App;
