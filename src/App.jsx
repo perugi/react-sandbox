@@ -1,11 +1,22 @@
 import styles from "./App.module.css";
 import { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
 
-function Profile({ user }) {
+function UserDashboard({ user }) {
+  const [notifications, setNotifications] = useState([]);
+  const [isDark, setIsDark] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
 
   const fullName = `${user.first} ${user.last}`;
+
+  useEffect(() => {
+    fetch(`/api/notifications/${user.id}`)
+      .then((res) => res.json())
+      .then(setNotifications);
+  }, [user.id]);
+
+  useEffect(() => {
+    document.body.classList.toggle(styles.dark, isDark);
+  }, [isDark]);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -16,13 +27,17 @@ function Profile({ user }) {
   return (
     <div>
       <h1>{fullName}</h1>
+      <p>Notifications: {notifications.length}</p>
       <p>Window width: {width}</p>
+      <button onClick={() => setIsDark((d) => !d)}>Toggle Theme</button>
     </div>
   );
 }
 
 function App() {
-  return <Profile user={{ first: "Dominik", last: "Perusko" }} />;
+  return (
+    <UserDashboard user={{ first: "Dominik", last: "Perusko", id: "69" }} />
+  );
 }
 
 export default App;
