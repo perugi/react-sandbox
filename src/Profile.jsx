@@ -1,24 +1,17 @@
-import { useParams } from "react-router";
-import DefaultProfile from "./DefaultProfile";
-import Popeye from "./Popeye";
-import Spinach from "./Spinach";
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 const Profile = () => {
-  const { name } = useParams();
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <h1>Hello from profile page!</h1>
       <p>So, how are you?</p>
+      <button onClick={() => setCount(count + 1)}>Click me!</button>
       <hr />
       <h2>The profile visited is here</h2>
-      {name === "popeye" ? (
-        <Popeye />
-      ) : name === "spinach" ? (
-        <Spinach />
-      ) : (
-        <DefaultProfile />
-      )}
+      <Outlet context={[count]} />
     </div>
   );
 };
